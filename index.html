@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Massamba DIENG — Géomaticien</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F8F9FA;
+            color: #2C2C2A;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            background: linear-gradient(135deg, #0D2137 0%, #1A3557 60%, #2E6DA4 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px; height: 600px;
+            background: rgba(46,109,164,0.15);
+            border-radius: 50%;
+            top: -200px; right: -200px;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px; height: 400px;
+            background: rgba(231,76,60,0.08);
+            border-radius: 50%;
+            bottom: -100px; left: -100px;
+        }
+        .hero-content { position: relative; z-index: 1; }
+        
+        .avatar {
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            border: 4px solid #E74C3C;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, #1A3557, #2E6DA4);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 48px;
+            box-shadow: 0 8px 32px rgba(231,76,60,0.3);
+        }
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .hero-title {
+            font-size: 16px;
+            color: #B8D4F0;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin: 12px 0;
+            font-weight: 300;
+        }
+        .hero-divider {
+            width: 60px; height: 3px;
+            background: #E74C3C;
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+        .hero-desc {
+            font-size: 15px;
+            color: #7FB3D3;
+            max-width: 500px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        /* Stats hero */
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            justify-content: center;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+        .hero-stat-num {
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+        }
+        .hero-stat-label {
+            font-size: 11px;
+            color: #7FB3D3;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Boutons hero */
+        .hero-btns {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background: #E74C3C;
+            color: white;
+            padding: 14px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 24px rgba(231,76,60,0.4);
+            transition: transform 0.2s;
+        }
+        .btn-primary:hover { transform: translateY(-2px); }
+        .btn-outline {
+            background: transparent;
+            color: white;
+            padding: 14px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 1px;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.2s;
+        }
+        .btn-outline:hover {
+            border-color: white;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.4);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ── SECTIONS ── */
+        section { padding: 80px 20px; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        
+        .section-tag {
+            font-size: 11px;
+            font-weight: 600;
+            color: #E74C3C;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+        }
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1A3557;
+            margin-bottom: 48px;
+        }
+
+        /* ── COMPÉTENCES ── */
+        .skills-section { background: white; }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+        }
+        .skill-card {
+            background: #F8F9FA;
+            border-radius: 16px;
+            padding: 28px 24px;
+            border-top: 4px solid;
+            transition: transform 0.2s;
+        }
+        .skill-card:hover { transform: translateY(-4px); }
+        .skill-icon { font-size: 32px; margin-bottom: 12px; }
+        .skill-category {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1A3557;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .skill-tag {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        /* ── PROJET ZONECORE ── */
+        .project-section { background: #F8F9FA; }
+        .project-header {
+            background: linear-gradient(135deg, #1A3557, #2E6DA4);
+            border-radius: 20px;
+            padding: 40px;
+            color: white;
+            margin-bottom: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .project-badge {
+            background: rgba(231,76,60,0.2);
+            color: #FF8A7A;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+        .project-name {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 8px 0;
+        }
+        .project-desc {
+            font-size: 15px;
+            color: #B8D4F0;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+        .project-links { display: flex; gap: 12px; flex-wrap: wrap; }
+        .project-link {
+            background: white;
+            color: #1A3557;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: transform 0.2s;
+        }
+        .project-link:hover { transform: translateY(-2px); }
+        .project-link.red {
+            background: #E74C3C;
+            color: white;
+        }
+
+        /* Stack technique */
+        .stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+        .stack-item {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .stack-icon { font-size: 24px; margin-bottom: 6px; }
+        .stack-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #1A3557;
+        }
+
+        /* ── CARTES ── */
+        .maps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 24px;
+        }
+        .map-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .map-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+        }
+        .map-img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+        }
+        .map-info { padding: 20px 24px; }
+        .map-num {
+            font-size: 11px;
+            font-weight: 600;
+            color: #E74C3C;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .map-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1A3557;
+            margin: 6px 0 8px;
+        }
+        .map-desc {
+            font-size: 13px;
+            color: #888;
+            line-height: 1.5;
+        }
+
+        /* ── CONTACT ── */
+        .contact-section {
+            background: linear-gradient(135deg, #0D2137, #1A3557);
+            color: white;
+            text-align: center;
+        }
+        .contact-section .section-title { color: white; }
+        .contact-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .contact-link {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .contact-link:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: #0D2137;
+            color: #7FB3D3;
+            text-align: center;
+            padding: 24px;
+            font-size: 13px;
+        }
+
+        /* Nav fixe */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(13,33,55,0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .nav-logo {
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 1px;
+        }
+        .nav-logo span { color: #E74C3C; }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: white; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .maps-grid { grid-template-columns: 1fr; }
+            nav { padding: 12px 20px; }
+            .nav-links { gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-logo">M<span>.</span>DIENG</div>
+    <div class="nav-links">
+        <a href="#competences">Compétences</a>
+        <a href="#projet">Projet</a>
+        <a href="#cartes">Cartes</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <img src="photo.jpg" alt="Massamba DIENG" class="avatar" 
+     style="object-fit:cover;">
+        <h1>Massamba Dieng</h1>
+        <p class="hero-title">Chargé d'études Géomarketing · Géomaticien</p>
+        <div class="hero-divider"></div>
+        <p class="hero-desc">
+            Spécialisé en analyse spatiale et géomarketing retail.<br>
+            Python · PostGIS · QGIS · Machine Learning spatial.
+        </p>
+
+        <div class="hero-stats">
+            <div>
+                <div class="hero-stat-num">3+</div>
+                <div class="hero-stat-label">Ans d'expérience</div>
+            </div>
+            <div>
+                <div class="hero-stat-num">2 000</div>
+                <div class="hero-stat-label">Clients analysés</div>
+            </div>
+            <div>
+                <div class="hero-stat-num">5</div>
+                <div class="hero-stat-label">Clusters DBSCAN</div>
+            </div>
+            <div>
+                <div class="hero-stat-num">4</div>
+                <div class="hero-stat-label">Cartes produites</div>
+            </div>
+        </div>
+
+        <div class="hero-btns">
+            <a href="https://zonecore.streamlit.app/" class="btn-primary" target="_blank">
+                🚀 Voir le dashboard live
+            </a>
+            <a href="https://github.com/Massamba1806/zonecore" class="btn-outline" target="_blank">
+                💻 GitHub ZoneCore
+            </a>
+        </div>
+    </div>
+    <div class="scroll-indicator">↓ scroll</div>
+</section>
+
+<!-- COMPÉTENCES -->
+<section class="skills-section" id="competences">
+    <div class="container">
+        <p class="section-tag">Stack technique</p>
+        <h2 class="section-title">Compétences</h2>
+        <div class="skills-grid">
+
+            <div class="skill-card" style="border-color:#E74C3C;">
+                <div class="skill-icon">🗺️</div>
+                <div class="skill-category">SIG & Cartographie</div>
+                <div class="skill-tags">
+                    <span class="skill-tag" style="background:#FDEDEC;color:#E74C3C;">QGIS</span>
+                    <span class="skill-tag" style="background:#FDEDEC;color:#E74C3C;">ArcGIS Pro</span>
+                    <span class="skill-tag" style="background:#FDEDEC;color:#E74C3C;">PostGIS</span>
+                    <span class="skill-tag" style="background:#FDEDEC;color:#E74C3C;">MapInfo</span>
+                </div>
+            </div>
+
+            <div class="skill-card" style="border-color:#3498DB;">
+                <div class="skill-icon">🐍</div>
+                <div class="skill-category">Python & Data</div>
+                <div class="skill-tags">
+                    <span class="skill-tag" style="background:#EBF5FB;color:#3498DB;">GeoPandas</span>
+                    <span class="skill-tag" style="background:#EBF5FB;color:#3498DB;">Pandas</span>
+                    <span class="skill-tag" style="background:#EBF5FB;color:#3498DB;">Scikit-learn</span>
+                    <span class="skill-tag" style="background:#EBF5FB;color:#3498DB;">Folium</span>
+                    <span class="skill-tag" style="background:#EBF5FB;color:#3498DB;">Streamlit</span>
+                </div>
+            </div>
+
+            <div class="skill-card" style="border-color:#2ECC71;">
+                <div class="skill-icon">🗄️</div>
+                <div class="skill-category">Bases de données</div>
+                <div class="skill-tags">
+                    <span class="skill-tag" style="background:#EAFAF1;color:#2ECC71;">PostgreSQL</span>
+                    <span class="skill-tag" style="background:#EAFAF1;color:#2ECC71;">PostGIS</span>
+                    <span class="skill-tag" style="background:#EAFAF1;color:#2ECC71;">SQL avancé</span>
+                    <span class="skill-tag" style="background:#EAFAF1;color:#2ECC71;">FME</span>
+                </div>
+            </div>
+
+            <div class="skill-card" style="border-color:#F39C12;">
+                <div class="skill-icon">📊</div>
+                <div class="skill-category">Analyse & Stats</div>
+                <div class="skill-tags">
+                    <span class="skill-tag" style="background:#FEF9E7;color:#F39C12;">DBSCAN</span>
+                    <span class="skill-tag" style="background:#FEF9E7;color:#F39C12;">CAH</span>
+                    <span class="skill-tag" style="background:#FEF9E7;color:#F39C12;">ACP</span>
+                    <span class="skill-tag" style="background:#FEF9E7;color:#F39C12;">Isochrones</span>
+                    <span class="skill-tag" style="background:#FEF9E7;color:#F39C12;">Scoring</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- PROJET ZONECORE -->
+<section class="project-section" id="projet">
+    <div class="container">
+        <p class="section-tag">Portfolio projet</p>
+        <h2 class="section-title">ZoneCore</h2>
+
+        <div class="project-header">
+            <div>
+                <span class="project-badge">Géomarketing · 2026</span>
+                <div class="project-name">ZoneCore</div>
+                <p class="project-desc">
+                    Analyse spatiale des zones de chalandise par segmentation 
+                    client DBSCAN. 2 000 clients lillois · 5 clusters · 
+                    281 IRIS · Isochrones multimodales.
+                </p>
+            </div>
+            <div class="project-links">
+                <a href="https://zonecore.streamlit.app/" class="project-link red" target="_blank">
+                    🚀 Dashboard live
+                </a>
+                <a href="https://github.com/Massamba1806/zonecore" 
+                   class="project-link" target="_blank">
+                    💻 Code GitHub
+                </a>
+            </div>
+        </div>
+
+        <div class="stack-grid">
+            <div class="stack-item">
+                <div class="stack-icon">🐍</div>
+                <div class="stack-name">Python</div>
+            </div>
+            <div class="stack-item">
+                <div class="stack-icon">🗄️</div>
+                <div class="stack-name">PostGIS</div>
+            </div>
+            <div class="stack-item">
+                <div class="stack-icon">🤖</div>
+                <div class="stack-name">DBSCAN</div>
+            </div>
+            <div class="stack-item">
+                <div class="stack-icon">🗺️</div>
+                <div class="stack-name">QGIS</div>
+            </div>
+            <div class="stack-item">
+                <div class="stack-icon">📡</div>
+                <div class="stack-name">API BAN</div>
+            </div>
+            <div class="stack-item">
+                <div class="stack-icon">🌐</div>
+                <div class="stack-name">Streamlit</div>
+            </div>
+            <div class="stack-item">
+                <div class="stack-icon">📊</div>
+                <div class="stack-name">Plotly</div>
+            </div>
+            <div class="stack-item">
+                <div class="stack-icon">🎨</div>
+                <div class="stack-name">Canva</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CARTES -->
+<section style="background:white; padding:80px 20px;" id="cartes">
+    <div class="container">
+        <p class="section-tag">Productions cartographiques</p>
+        <h2 class="section-title">Les 4 cartes</h2>
+        <div class="maps-grid">
+
+            <div class="map-card">
+                <img src="cartes/carte1.jpg" alt="Carte 1" class="map-img"
+                     onerror="this.style.background='#1A3557';this.style.display='flex'">
+                <div class="map-info">
+                    <div class="map-num">Carte 01</div>
+                    <div class="map-title">Pénétration commerciale par IRIS</div>
+                    <div class="map-desc">
+                        Taux de pénétration par quartier INSEE · 
+                        Choroplèthe · Clusters DBSCAN superposés
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-card">
+                <img src="cartes/carte2.jpg" alt="Carte 2" class="map-img">
+                <div class="map-info">
+                    <div class="map-num">Carte 02</div>
+                    <div class="map-title">Accessibilité multimodale</div>
+                    <div class="map-desc">
+                        Isochrones voiture · vélo · marche · 
+                        OpenRouteService API · 12 zones générées
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-card">
+                <img src="cartes/carte3.jpg" alt="Carte 3" class="map-img">
+                <div class="map-info">
+                    <div class="map-num">Carte 03</div>
+                    <div class="map-title">Zones réelles vs approche classique</div>
+                    <div class="map-desc">
+                        Zone réelle DBSCAN 727 km² vs cercle 314 km² · 
+                        +132% de territoire découvert
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-card">
+                <img src="cartes/carte4.jpg" alt="Carte 4" class="map-img">
+                <div class="map-info">
+                    <div class="map-num">Carte 04</div>
+                    <div class="map-title">Profil détaillé des segments clients</div>
+                    <div class="map-desc">
+                        5 clusters · Panier moyen · Fréquence · 
+                        CA estimé par segment
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+    <div class="container">
+        <p class="section-tag" style="color:#FF8A7A;">Contact</p>
+        <h2 class="section-title">Travaillons ensemble</h2>
+        <p style="color:#B8D4F0; font-size:16px; max-width:500px; margin:0 auto; line-height:1.7;">
+            Disponible pour des opportunités en géomarketing, 
+            analyse spatiale et data SIG.
+        </p>
+        <div class="contact-links">
+            <a href="mailto:massdieng1806@gmail.com" class="contact-link">
+                📧 massdieng1806@gmail.com
+            </a>
+            <a href="https://github.com/Massamba1806" class="contact-link" target="_blank">
+                💻 GitHub
+            </a>
+            <a href="https://linkedin.com/in/" class="contact-link" target="_blank">
+                💼 LinkedIn
+            </a>
+            <a href="https://zonecore.streamlit.app/" class="contact-link" target="_blank">
+                🚀 Dashboard ZoneCore
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Massamba DIENG · Géomaticien | Chargé d'études Géomarketing · 
+    Python · PostGIS · QGIS</p>
+</footer>
+
+</body>
+</html>
